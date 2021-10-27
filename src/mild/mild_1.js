@@ -41,7 +41,7 @@ export function getIncreasingArray(startNumber, endNumber) {
  */
 export function maxAndMin(numbers) {
     let dict = {};
-    let min = 0;
+    let min = 100;
     let max = 0;
     for (let x in numbers) {
         if (x > max) {
