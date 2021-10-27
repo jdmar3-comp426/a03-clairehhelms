@@ -25,7 +25,7 @@ export function identifyVariable(variable) {
  */
 export function identifyArray(array) {
    let list = [];
-   for (let x in array) {
+   for (const x of array) {
       list.push(identifyVariable(x));
    }
    return list;
@@ -69,7 +69,7 @@ export function removeKey(object, key) {
  */
 export function removeKeyNonDestructive(object, key) {
    let dict = {};
-   for (let x in object) {
+   for (const x of object) {
       if (x != key) {
          dict[x] = object[x];
       }
@@ -100,7 +100,7 @@ export function removeKeyNonDestructive(object, key) {
  */
 export function removeKeys(object, keyList) {
    let newobj = object;
-   for (let x in keyList) {
+   for (const x of keyList) {
       newobj.removeKeyNonDestructive(x);
    }
    return newobj;
