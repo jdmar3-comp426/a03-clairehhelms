@@ -41,8 +41,17 @@ export function getIncreasingArray(startNumber, endNumber) {
  */
 export function maxAndMin(numbers) {
     let dict = {};
-    dict["min"] = Math.min.apply(Math, numbers);
-    dict["max"] = Math.max.apply(Math, numbers);
+    let min, max = 0;
+    for (let x in numbers) {
+        if (x > max) {
+            max = x;
+        }
+        else if (x < min) {
+            min = x;
+        }
+    }
+    dict["min"] = min;
+    dict["max"] = max;
     return dict;
 }
 
@@ -59,8 +68,8 @@ export function maxAndMin(numbers) {
 export function countArray(array) {
     let dict = {};
     for (let x in array) {
-        if (x in dict){
-            dict[x] += 1;
+        if (x in dict) {
+            dict[x] ++;
         }
         else {
             dict[x] = 1;
