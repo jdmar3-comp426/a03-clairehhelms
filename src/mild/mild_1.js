@@ -43,7 +43,7 @@ export function maxAndMin(numbers) {
     let dict = {};
     let min = 100;
     let max = 0;
-    for (let x in numbers) {
+    for (let x of numbers) {
         if (x > max) {
             max = x;
         }
