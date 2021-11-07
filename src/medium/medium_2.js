@@ -34,10 +34,11 @@ export function getAvg(object, key) {
             }
         }
     }
-    let sum = arr.reduce(function (accumulator, current) {
-        return accumulator + current;
-    });
-    return sum;
+    let sum = 0;
+    for (const x of arr) {
+        sum = sum + x;
+    }
+    return sum/arr.length;
 }
 
 export function getYears(object) {
