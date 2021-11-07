@@ -6,7 +6,7 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   return {"type": type(variable), "value": variable};
+   return {"type": typeof(variable), "value": variable};
 }
 
 
@@ -69,9 +69,9 @@ export function removeKey(object, key) {
  */
 export function removeKeyNonDestructive(object, key) {
    let dict = {};
-   for (const x of object) {
-      if (x != key) {
-         dict[x] = object[x];
+   for (const [k, value] of Object.entries(object)) {
+      if (k != key) {
+         dict[k] = value;
       }
    }
    return dict;
@@ -101,7 +101,7 @@ export function removeKeyNonDestructive(object, key) {
 export function removeKeys(object, keyList) {
    let newobj = object;
    for (const x of keyList) {
-      newobj.removeKeyNonDestructive(x);
+      removeKeyNonDestructive(object, x);
    }
    return newobj;
 }
