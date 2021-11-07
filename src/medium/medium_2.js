@@ -34,8 +34,10 @@ export function getAvg(object, key) {
             }
         }
     }
-    const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
-    return arrAvg;
+    let sum = arr.reduce(function (accumulator, current) {
+        return accumulator + current;
+    });
+    return sum;
 }
 
 export function getYears(object) {
@@ -48,6 +50,24 @@ export function getYears(object) {
         }
     }
     return arr;
+}
+
+export function getRatio(object) {
+    let hybrids = 0;
+    let nonhybrids = 0;
+    for (const x of object) {
+        for (const [key, value] of Object.entries(x)) {
+            if (key === "hybrid") {
+                if (value === false) {
+                    nonhybrids++
+                }
+                else {
+                    hybrids++
+                }
+            }
+        }
+    }
+    return (hybrids/nonhybrids)
 }
 
 /**
