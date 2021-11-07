@@ -30,7 +30,7 @@ export function getAvg(object, key) {
     for (const x of object) {
         for (const [k, value] of Object.entries(x)) {
             if (k === key) {
-            arr.push(value);
+                arr.push(value);
             }
         }
     }
@@ -45,7 +45,7 @@ export function getYears(object) {
     for (const x of object) {
         for (const [k, value] of Object.entries(x)) {
             if (k === "year") {
-            arr.push(value);
+                arr.push(value);
             }
         }
     }
