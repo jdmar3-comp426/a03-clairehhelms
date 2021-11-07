@@ -51,8 +51,8 @@ export function maxAndMin(numbers) {
             min = x;
         }
     }
-    dict["min"] = Number(min);
     dict["max"] = Number(max);
+    dict["min"] = Number(min);
     return dict;
 }
 

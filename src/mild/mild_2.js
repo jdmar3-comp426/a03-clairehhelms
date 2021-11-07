@@ -70,7 +70,7 @@ export function removeKey(object, key) {
 export function removeKeyNonDestructive(object, key) {
    let dict = {};
    for (const [k, value] of Object.entries(object)) {
-      if (k != key) {
+      if (k !== key) {
          dict[k] = value;
       }
    }
