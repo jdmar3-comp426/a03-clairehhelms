@@ -28,9 +28,11 @@ export const allCarStats = {
 export function getAvg(object, key) {
     let sum = 0;
     for (const x of object) {
-        sum += x[key];
-        console.log(x);
-        console.log(x[key]);
+        for (const [k, value] of Object.entries(x)) {
+            if (k === key) {
+                sum += (value);
+            }
+        }
     }
     return (sum/(object.length));
 };
