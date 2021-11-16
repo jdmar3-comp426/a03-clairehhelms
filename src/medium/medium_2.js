@@ -28,7 +28,7 @@ export const allCarStats = {
 export function getAvg(object, key) {
     let arr = [];
     for (const x of object) {
-        for (const [k, value] of x) {
+        for (const [k, value] of Object.entries(x)) {
             if (k === key) {
                 arr.push(value);
             }
@@ -44,7 +44,7 @@ export function getAvg(object, key) {
 export function getYears(object) {
     let arr = [];
     for (const x of object) {
-        for (const [k, value] of x) {
+        for (const [k, value] of Object.entries(x)) {
             if (k === "year") {
                 arr.push(value);
                 console.log(value);
@@ -58,7 +58,7 @@ export function getRatio(object) {
     let hybrids = 0;
     let nonhybrids = 0;
     for (const x of object) {
-        for (const [key, value] of XPathEvaluator) {
+        for (const [key, value] of Object.entries(x)) {
             if (key === "hybrid") {
                 if (value === false) {
                     nonhybrids++;
