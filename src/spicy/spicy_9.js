@@ -101,12 +101,12 @@ export const tenTimesFifty = () => {
 export const everyEven = (arr, test) => {
     let x = 0;
     while (x < arr.length) {
-        if ((test(arr[x])) == False) {
-            return False;
+        if ((test(arr[x])) == false) {
+            return false;
         }
         x += 2;
     }
-    return True;
+    return true;
 };
 
 
@@ -133,11 +133,11 @@ export const someEven = (arr, test) => {
     let x = 0;
     while (x < arr.length) {
         if (test(arr[x])) {
-            return False;
+            return false;
         }
         x += 2;
     }
-    return True;
+    return true;
 };
 
 
