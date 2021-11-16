@@ -47,6 +47,7 @@ export function getYears(object) {
         for (const [k, value] of Object.entries(x)) {
             if (k === "year") {
                 arr.push(value);
+                console.log(value)
             }
         }
     }
