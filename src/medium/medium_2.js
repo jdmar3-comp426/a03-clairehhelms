@@ -20,23 +20,26 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: {"city": getAvg(mpg_data, "city"), "highway": getAvg(mpg_data, "highway")},
+    avgMpg: getAvg(mpg_data),
     allYearStats: getStatistics(getYears(mpg_data)),
     ratioHybrids: getRatio(mpg_data),
 };
 
-export function getAvg(object, key) {
-    let sum = 0;
+export function getAvg(object) {
+    let d = {"city": 0, "highway": 0}
     for (const x of object) {
         for (const [k, value] of Object.entries(x)) {
-            if (k === key) {
-                sum += (value);
-                console.log(k);
-                console.log(value);
+            if (k === "city_mpg") {
+                d["city"] += (value);
+            }
+            else if (k === "highway_mpg") {
+                d["highway"] += value;
             }
         }
     }
-    return (sum/(object.length));
+    d["city"] = d["city"]/(object.length);
+    d["highway"] = d["highway"]/(object.length);
+    return d;
 };
 
 export function getYears(object) {
