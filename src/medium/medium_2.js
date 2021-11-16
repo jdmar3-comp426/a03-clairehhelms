@@ -28,7 +28,7 @@ export const allCarStats = {
 export function getAvg(object, key) {
     let arr = [];
     for (const x of object) {
-        for (const [k, value] of Object.entries(x)) {
+        for (const [k, value] of x) {
             if (k === key) {
                 arr.push(value);
             }
@@ -39,38 +39,38 @@ export function getAvg(object, key) {
         sum = sum + x;
     }
     return sum/arr.length;
-}
+};
 
 export function getYears(object) {
     let arr = [];
     for (const x of object) {
-        for (const [k, value] of Object.entries(x)) {
+        for (const [k, value] of x) {
             if (k === "year") {
                 arr.push(value);
-                console.log(value)
+                console.log(value);
             }
         }
     }
     return arr;
-}
+};
 
 export function getRatio(object) {
     let hybrids = 0;
     let nonhybrids = 0;
     for (const x of object) {
-        for (const [key, value] of Object.entries(x)) {
+        for (const [key, value] of XPathEvaluator) {
             if (key === "hybrid") {
                 if (value === false) {
-                    nonhybrids++
+                    nonhybrids++;
                 }
                 else {
-                    hybrids++
+                    hybrids++;
                 }
             }
         }
     }
     return (hybrids/nonhybrids)
-}
+};
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
