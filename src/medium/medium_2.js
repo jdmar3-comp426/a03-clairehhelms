@@ -22,29 +22,33 @@ see under the methods section
 export const allCarStats = {
     avgMpg: {"city": getAvg(mpg_data, "city"), "highway": getAvg(mpg_data, "highway")},
     allYearStats: getStatistics(getYears(mpg_data)),
-    ratioHybrids: undefined,
+    ratioHybrids: getRatio(mpg_data),
 };
 
 export function getAvg(object, key) {
     let arr = [];
-    for (const [k, value] of Object.entries(object)) {
-        if (k === key) {
-            arr.push(value);
+    for (const x of object) {
+        for (const [k, value] of Object.entries(x)) {
+            if (k === key) {
+                arr.push(value);
+            }
         }
     }
     let sum = 0;
     for (const x of arr) {
         sum = sum + x;
     }
-    return (sum/arr.length);
+    return sum/arr.length;
 };
 
 export function getYears(object) {
     let arr = [];
-    for (const [k, value] of Object.entries(object)) {
-        if (k === "year") {
-            arr.push(value);
-            console.log(value);
+    for (const x of object) {
+        for (const [k, value] of Object.entries(x)) {
+            if (k === "year") {
+                arr.push(value);
+                console.log(value);
+            }
         }
     }
     return arr;
@@ -53,13 +57,15 @@ export function getYears(object) {
 export function getRatio(object) {
     let hybrids = 0;
     let nonhybrids = 0;
-    for (const [key, value] of Object.entries(object)) {
-        if (key === "hybrid") {
-            if (value === false) {
-                nonhybrids++;
-            }
-            else {
-                hybrids++;
+    for (const x of object) {
+        for (const [key, value] of Object.entries(x)) {
+            if (key === "hybrid") {
+                if (value === false) {
+                    nonhybrids++;
+                }
+                else {
+                    hybrids++;
+                }
             }
         }
     }

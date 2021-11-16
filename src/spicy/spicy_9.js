@@ -132,12 +132,12 @@ export const everyEven = (arr, test) => {
 export const someEven = (arr, test) => {
     let x = 0;
     while (x < arr.length) {
-        if (test(arr[x])) {
-            return false;
+        if (test(arr[x]) == true) {
+            return true;
         }
         x += 2;
     }
-    return true;
+    return false;
 };
 
 
@@ -166,7 +166,7 @@ export const filter = (arr, test) => {
     let x = 0;
     let d = {"pass": [], "fail": []};
     while (x < arr.length) {
-        if (test(arr[x])) {
+        if (test(arr[x]) == true) {
             d["pass"].push(arr[x]);
         }
         else {
