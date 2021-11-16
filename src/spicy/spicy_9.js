@@ -15,6 +15,7 @@
  *                from calling the function
  */
 export const repeat = (fn, n, ...params) => {
+    const i = 0;
     while (i < n) {
         fn(...params);
         i++;
@@ -27,6 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
+    const i = 0;
     while (i < 10) {
         console.log("Hello, world!");
         i++;
