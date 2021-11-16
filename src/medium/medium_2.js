@@ -26,19 +26,11 @@ export const allCarStats = {
 };
 
 export function getAvg(object, key) {
-    let arr = [];
-    for (const x of object) {
-        for (const [k, value] of Object.entries(x)) {
-            if (k === key) {
-                arr.push(value);
-            }
-        }
-    }
     let sum = 0;
-    for (const x of arr) {
-        sum = sum + x;
+    for (const x of object) {
+        sum += x[key];
     }
-    return sum/arr.length;
+    return (sum/(object.length));
 };
 
 export function getYears(object) {
