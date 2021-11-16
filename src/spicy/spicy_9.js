@@ -54,7 +54,7 @@ export const multiplyBy = (num1) => {
     const multiply2 = (num1, num2) => {
         return num1 * num2
     }
-    return multiply2(num1, ...param)
+    return multiply2(num1, ...param);
 };
 
 
@@ -62,7 +62,9 @@ export const multiplyBy = (num1) => {
  * Use the multiplyBy function to create and export a function named
  *   "tenTimes" that multiplies a number by 10.
  */
-export const tenTimes = undefined;
+export const tenTimes = (num) => {
+    return (num * 10);
+};
 
 
 /**
@@ -99,7 +101,7 @@ export const tenTimesFifty = () => {
  */
 export const everyEven = (arr, test) => {
     let x = 0;
-    while (x < length(arr)) {
+    while (x < arr.length) {
         if ((test(arr[x])) == False) {
             return False;
         }
@@ -130,7 +132,7 @@ export const everyEven = (arr, test) => {
  */
 export const someEven = (arr, test) => {
     let x = 0;
-    while (x < length(arr)) {
+    while (x < arr.length) {
         if (test(arr[x])) {
             return False;
         }
@@ -164,7 +166,7 @@ export const someEven = (arr, test) => {
 export const filter = (arr, test) => {
     let x = 0;
     let d = {"pass": [], "fail": []};
-    while (x < length(arr)) {
+    while (x < arr.length) {
         if (test(arr[x])) {
             d["pass"].push(arr[x]);
         }
