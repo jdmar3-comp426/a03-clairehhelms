@@ -31,6 +31,8 @@ export function getAvg(object, key) {
         for (const [k, value] of Object.entries(x)) {
             if (k === key) {
                 sum += (value);
+                console.log(k);
+                console.log(value);
             }
         }
     }
