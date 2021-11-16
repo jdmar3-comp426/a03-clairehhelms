@@ -172,6 +172,7 @@ export const filter = (arr, test) => {
         else {
             d["fail"].push(arr[x]);
         }
+        x++;
     }
     return d;
 };

@@ -29,6 +29,8 @@ export function getAvg(object, key) {
     let sum = 0;
     for (const x of object) {
         sum += x[key];
+        console.log(x);
+        console.log(x[key]);
     }
     return (sum/(object.length));
 };
