@@ -152,7 +152,7 @@ export function hybridz(object) {
     for (const ent in b) {
         a.push({"make": ent, "hybrids": b[ent]});
     }
-    a.sort( (val1, val2) => val2.hybrids.length-val1.hybrids.length);
+    a.sort((a, b) => b.hybrids.length-a.hybrids.length);
     return a;
 };
 
