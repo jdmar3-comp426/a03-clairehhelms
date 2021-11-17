@@ -85,6 +85,3 @@ export function searchByYear(car_data, years) {
     }
     return birthday.sort((a, b) => b.year-a.year);
 }
-
-
-console.log(searchByYear(mpg_data, [2010, 2011]));
