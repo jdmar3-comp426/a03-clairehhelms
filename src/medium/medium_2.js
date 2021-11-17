@@ -130,6 +130,38 @@ export function getRatio(object) {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: hybridz(mpg_data),
     avgMpgByYearAndHybrid: undefined
+};
+
+export function hybridz(object) {
+    let a = [];
+    let b = {};
+    let make_list = [];
+    for (const x of object) {
+        if (x["hybrids"] == true) {
+            if (make_list.includes(x["make"])) {
+                b[x["make"]].push(x["id"]);
+            }
+            else {
+                b[x["make"]] = [x["id"]];
+            }
+        }
+    }
+    for (const ent in b) {
+        a.push({"make": ent, "hybrids": b[ent]});
+    }
+    return a.sort( (val1, val2) => val2.hybrids.length-val1.hybrids.length);
+};
+
+export function ambyah(object) {
+    let years = {};
+    let inside = {};
+    let years_list = [];
+
+    for (const x of object) {
+        if (years_list.includes(x["year"])) {
+            years[x["year"]]["city"] += [x["year"]]["city_mpg"]
+        }
+    }
 };
