@@ -131,37 +131,53 @@ export function getRatio(object) {
  */
 export const moreStats = {
     makerHybrids: hybridz(mpg_data),
-    avgMpgByYearAndHybrid: undefined
+    avgMpgByYearAndHybrid: getit(mpg_data)
 };
 
 export function hybridz(object) {
     let a = [];
     let b = {};
-    let make_list = [];
+    const make_list = [];
     for (const x of object) {
-        if (x["hybrids"] == true) {
-            if (make_list.includes(x["make"])) {
+        if (x["hybrid"] == true) {
+            if (make_list.includes(x["make"])) {   
                 b[x["make"]].push(x["id"]);
             }
             else {
                 b[x["make"]] = [x["id"]];
+                make_list.push([x["make"]][0]);
             }
         }
     }
     for (const ent in b) {
         a.push({"make": ent, "hybrids": b[ent]});
     }
-    return a.sort( (val1, val2) => val2.hybrids.length-val1.hybrids.length);
+    a.sort( (val1, val2) => val2.hybrids.length-val1.hybrids.length);
+    return a;
 };
 
-export function ambyah(object) {
-    let years = {};
-    let inside = {};
+export function getit(object) {
     let years_list = [];
+    let years = {};
 
     for (const x of object) {
-        if (years_list.includes(x["year"])) {
-            years[x["year"]]["city"] += [x["year"]]["city_mpg"]
+        if (!years_list.includes(x["year"])) {
+            years_list.push(x["year"]);
         }
     }
+    for (const y of years_list) {
+        let hybrids = object.filter(car => car.year == y && car.hybrid == true);
+        let nothyb = object.filter(car => car.year == y && car.hybrid == false);
+        years[y] = {
+            hybrid: {
+                city: hybrids.reduce((p, c) => p + c.city_mpg, 0) / hybrids.length,
+                highway: hybrids.reduce((p, c) => p + c.highway_mpg, 0) / hybrids.length
+            },
+            notHybrid: {
+                city: nothyb.reduce((p, c) => p + c.city_mpg, 0) / nothyb.length,
+                highway: nothyb.reduce((p, c) => p + c.highway_mpg, 0) / nothyb.length
+            }
+        }
+    }
+    return years;
 };
