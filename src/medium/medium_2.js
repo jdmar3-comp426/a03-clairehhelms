@@ -20,11 +20,57 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: getAvg(mpg_data),
+    allYearStats: getStatistics(getYears(mpg_data)),
+    ratioHybrids: getRatio(mpg_data),
 };
 
+export function getAvg(object) {
+    let d = {"city": 0, "highway": 0}
+    for (const x of object) {
+        for (const [k, value] of Object.entries(x)) {
+            if (k === "city_mpg") {
+                d["city"] += (value);
+            }
+            else if (k === "highway_mpg") {
+                d["highway"] += value;
+            }
+        }
+    }
+    d["city"] = d["city"]/(object.length);
+    d["highway"] = d["highway"]/(object.length);
+    return d;
+};
+
+export function getYears(object) {
+    let arr = [];
+    for (const x of object) {
+        for (const [k, value] of Object.entries(x)) {
+            if (k === "year") {
+                arr.push(value);
+            }
+        }
+    }
+    return arr;
+};
+
+export function getRatio(object) {
+    let hybrids = 0;
+    let nonhybrids = 0;
+    for (const x of object) {
+        for (const [key, value] of Object.entries(x)) {
+            if (key === "hybrid") {
+                if (value === false) {
+                    nonhybrids++;
+                }
+                else {
+                    hybrids++;
+                }
+            }
+        }
+    }
+    return (hybrids/nonhybrids)
+};
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -84,6 +130,54 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: hybridz(mpg_data),
+    avgMpgByYearAndHybrid: getit(mpg_data)
+};
+
+export function hybridz(object) {
+    let a = [];
+    let b = {};
+    const make_list = [];
+    for (const x of object) {
+        if (x["hybrid"] == true) {
+            if (make_list.includes(x["make"])) {   
+                b[x["make"]].push(x["id"]);
+            }
+            else {
+                b[x["make"]] = [x["id"]];
+                make_list.push([x["make"]][0]);
+            }
+        }
+    }
+    for (const ent in b) {
+        a.push({"make": ent, "hybrids": b[ent]});
+    }
+    a.sort((a, b) => b.hybrids.length-a.hybrids.length);
+    return a;
+};
+
+export function getit(object) {
+    let years_list = [];
+    let years = {};
+
+    for (const x of object) {
+        if (!years_list.includes(x["year"])) {
+            years_list.push(x["year"]);
+        }
+    }
+    for (const y of years_list) {
+        let hybrids = object.filter(car => car.year == y && car.hybrid == true);
+        let nothyb = object.filter(car => car.year == y && car.hybrid == false);
+        years[y] = {
+            hybrid: {
+                city: hybrids.reduce((p, c) => p + c.city_mpg, 0) / hybrids.length,
+                highway: hybrids.reduce((p, c) => p + c.highway_mpg, 0) / hybrids.length
+            },
+            notHybrid: {
+                city: nothyb.reduce((p, c) => p + c.city_mpg, 0) / nothyb.length,
+                highway: nothyb.reduce((p, c) => p + c.highway_mpg, 0) / nothyb.length
+            }
+        }
+    }
+    return years;
 };
